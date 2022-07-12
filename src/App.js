@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import useStore from "./utils/useStore";
+import Todo from "./components/Todo";
+export default function App() {
+    const { nowTitle, nowContent, title, content } = useStore();
+    const setTitle = useStore((state) => state.setTitle);
+    const setContent = useStore((state) => state.setContent);
+    const setNowTitle = useStore((state) => state.setNowTitle);
+    const setNowContent = useStore((state) => state.setNowContent);
+    return (
+        <div>
+            {nowTitle} <br />
+            {nowContent}
+            <div>
+                <div style={{ width: "100%" }}>
+                    <input
+                        type="text"
+                        style={{
+                            width: "80%",
+                            height: "30px",
+                            display: "block",
+                            margin: "30px auto",
+                        }}
+                        onChange={(e) => {
+                            setNowTitle(e.target.value);
+                        }}
+                    />
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+                    <textarea
+                        style={{
+                            width: "80%",
+                            height: "90px",
+                            display: "block",
+                            margin: "30px auto",
+                            resize: "none",
+                        }}
+                        onChange={(e) => {
+                            setNowContent(e.target.value);
+                        }}
+                    />
+                </div>
+                <button
+                    onClick={() => {
+                        setTitle([nowTitle, ...title]);
+                        setContent([nowContent, ...content]);
+                        setNowTitle("")
+                        setNowContent("")
+                    }}
+                >
+                    가봅시다
+                </button>
+                <div>
+                    <Todo></Todo>
+                </div>
+            </div>
+        </div>
+    );
 }
-
-export default App;

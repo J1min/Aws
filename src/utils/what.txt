@@ -1,1 +1,1 @@
-context 같은 친구 저장
+context, zustand 같은 친구 저장
