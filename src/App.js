@@ -7,6 +7,9 @@ export default function App() {
     const setContent = useStore((state) => state.setContent);
     const setNowTitle = useStore((state) => state.setNowTitle);
     const setNowContent = useStore((state) => state.setNowContent);
+    const bindId = document.querySelector("#title");
+    const bindContent = document.querySelector("#content");
+
     return (
         <div>
             {nowTitle} <br />
@@ -14,6 +17,7 @@ export default function App() {
             <div>
                 <div style={{ width: "100%" }}>
                     <input
+                        id="title"
                         type="text"
                         style={{
                             width: "80%",
@@ -27,6 +31,7 @@ export default function App() {
                     />
 
                     <textarea
+                        id="content"
                         style={{
                             width: "80%",
                             height: "90px",
@@ -43,13 +48,20 @@ export default function App() {
                     onClick={() => {
                         setTitle([nowTitle, ...title]);
                         setContent([nowContent, ...content]);
-                        setNowTitle("")
-                        setNowContent("")
+                        setNowTitle("");
+                        setNowContent("");
+                        bindId.value = null;
+                        bindContent.value = null;
                     }}
                 >
                     가봅시다
                 </button>
-                <div>
+                <div
+                    style={{
+                        width: "80%",
+                        margin: "0 auto",
+                    }}
+                >
                     <Todo></Todo>
                 </div>
             </div>

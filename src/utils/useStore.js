@@ -6,9 +6,9 @@ const useStore = create((set) => ({
     nowContent: "",
     setNowContent: (title) => set({ nowContent: title }),
 
-    title: ["1", "2"],
+    title: [],
     setTitle: (title) => set({ title }),
-    content: ["내용1", "내용2"],
+    content: [],
     setContent: (content) => set({ content }),
 }));
 
