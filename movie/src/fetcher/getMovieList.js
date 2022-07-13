@@ -4,18 +4,23 @@ import axios from "axios";
 const API = (search) =>
     `https://fake-movie-database-api.herokuapp.com/api?s=${search}`;
 
-export const getMovieList = async (search) => {
+export const getMovieListUseFetch = async (search) => {
     try {
         const response = await fetch(API(search), { method: "GET" }).then((r) =>
             r.json()
         );
-        console.log(response);
+        return response.Search;
     } catch (err) {
-        alert("네트워크 에러 발생");
         console.error("getMovieList - fetch error: " + err);
     }
 };
 
-export const getMovieListUseAxios = () => {
-    axios.get(API(search)).then((response) => {});
+export const getMovieListUseAxios = async (search) => {
+    try {
+        // response  : { Search }, // 확신이 있다면 이렇게 써서 코드이쁘게 ㄱㄱ
+        const response = await axios.get(API(search));
+        return response.data.Search;
+    } catch (err) {
+        console.error("getMovieList - axios error: " + err);
+    }
 };
